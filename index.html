@@ -38,6 +38,7 @@
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.5);
             animation: slideIn 1s ease-in-out;
+            position: relative;
         }
         .header h1 {
             margin: 0;
@@ -52,6 +53,45 @@
             color: orange;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
             animation: slideIn 2s ease-in-out;
+        }
+        .menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .menu div {
+            width: 30px;
+            height: 3px;
+            background-color: white;
+            margin: 6px 0;
+        }
+        .floating-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .floating-menu a {
+            text-decoration: none;
+            color: white;
+            background-color: orange;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+        .floating-menu a:hover {
+            background-color: #ff9900;
         }
         .product {
             background-color: rgba(0, 0, 0, 0.7);
@@ -129,8 +169,19 @@
 </head>
 <body>
     <div class="header">
+        <div class="menu" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <h1>RIMORA</h1>
         <h2>WATCHES</h2>
+    </div>
+    <div class="floating-menu" id="floatingMenu">
+        <a href="https://www.rimora.store/apps/track123">Track My Order</a>
+        <a href="https://www.rimora.store/collections/all">Best Seller</a>
+        <a href="https://www.rimora.store/pages/contact">Contact</a>
+        <a href="https://shopify.com/89202229548/identity/lookup?destination_uuid=410cb63b-4cce-44e3-9d30-fba9666b2197&redirect_uri=https%3A%2F%2Fshopify.com%2F89202229548%2Faccount%2Fcallback&rid=4f9c3c30-bd76-4f39-bdd0-940d9c590e3">Log In</a>
     </div>
     <div class="product">
         <img src="https://www.rimora.store/cdn/shop/files/147_1920x1920.png?v=1723388261" alt="Montre Mustang GT500">
@@ -160,13 +211,22 @@
         <p class="price">$99.00 <span class="old-price">$125.00</span></p>
         <a href="https://www.rimora.store/products/nismo-gtr"><button>Add To Cart</button></a>
     </div>
-    <div class="view-all">
+        <div class="view-all">
         <a href="https://www.rimora.store/collections/all">View All</a>
     </div>
     <div class="footer">
         <a href="https://www.tiktok.com/@shadow_ff18?_t=8pWw9bERG0u&_r=1">@shadow_ff18</a>
     </div>
     <script>
+        function toggleMenu() {
+            const menu = document.getElementById('floatingMenu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        }
+
         let currentIndex = 0;
         const products = document.querySelectorAll('.product');
         function showNextProduct() {
